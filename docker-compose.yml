@@ -2,8 +2,8 @@ version: '3.4'
 
 services:
   backend:
-    container_name: backend
-    image: backend
+    container_name: GazonNDVImap
+    image: GazonNDVImap
     build:
       context: .
       dockerfile: backend\Dockerfile
