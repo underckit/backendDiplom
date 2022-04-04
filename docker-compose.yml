@@ -2,7 +2,24 @@ version: '3.4'
 
 services:
   backend:
-    image: ${DOCKER_REGISTRY-}backend
+    container_name: backend
+    image: backend
     build:
       context: .
       dockerfile: backend\Dockerfile
+    environment:
+      DB_CONNECTION: "Server=postgres;Port=5432;Database=GazonNDVI;User Id=postgres;Password=Rbhf080166;"
+    ports:
+      - "5000:5000"
+    depends_on:
+     - postgres
+
+  postgres:
+    image: postgres
+    container_name: 'postgres'
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "Rbhf080166"
+      POSTGRES_DB: "GazonNDVI"
+    ports:
+      - "5432:5432"
