@@ -9,7 +9,7 @@ services:
       - ASPNETCORE_ENVIRONMENT=Production
     build:
       context: ./
-      dockerfile: backend/Dockerfile
+      dockerfile: Dockerfile
     ports:
       - "4002:80"
     volumes:
