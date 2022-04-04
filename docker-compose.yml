@@ -1,9 +1,9 @@
-version: '3'
+version: '3.4'
 
 services:
-  GazonNDVImap:
-    container_name: GazonNDVImap
-    hostname:  GazonNDVImap
+  grass-NDVImapBackend:
+    container_name: grass-NDVImapBackend
+    hostname:  grass-NDVImapBackend
     restart: always
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
@@ -11,7 +11,7 @@ services:
       context: ./
       dockerfile: backend/Dockerfile
     ports:
-      - "3002:80"
+      - "4002:80"
     volumes:
       - /data:/app/Data
     networks:
