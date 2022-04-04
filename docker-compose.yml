@@ -1,25 +1,22 @@
-version: '3.4'
+version: '3'
 
 services:
-  backend:
+  GazonNDVImap:
     container_name: GazonNDVImap
-    image: GazonNDVImap
+    hostname:  GazonNDVImap
+    restart: always
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
     build:
-      context: .
-      dockerfile: backend\Dockerfile
-    environment:
-      DB_CONNECTION: "Server=postgres;Port=5432;Database=GazonNDVI;User Id=postgres;Password=Rbhf080166;"
+      context: ./
+      dockerfile: backend/Dockerfile
     ports:
-      - "5000:5000"
-    depends_on:
-     - postgres
+      - "3002:80"
+    volumes:
+      - /data:/app/Data
+    networks:
+      - global
 
-  postgres:
-    image: postgres
-    container_name: 'postgres'
-    environment:
-      POSTGRES_USER: "postgres"
-      POSTGRES_PASSWORD: "Rbhf080166"
-      POSTGRES_DB: "GazonNDVI"
-    ports:
-      - "5432:5432"
+networks:
+  global:
+    external: true
