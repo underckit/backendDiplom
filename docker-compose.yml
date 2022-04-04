@@ -1,9 +1,9 @@
 version: '3.4'
 
 services:
-  grass-NDVImapBackend:
-    container_name: grass-NDVImapBackend
-    hostname:  grass-NDVImapBackend
+  grass-ndvimapbackend:
+    container_name: grass-ndvimapbackend
+    hostname:  grass-ndvimapbackend
     restart: always
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
