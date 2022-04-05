@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using backend.Models;
+using Microsoft.EntityFrameworkCore;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -22,11 +23,19 @@ namespace backend.Controllers
         // GET: api/<TestController>
        
        
-         [HttpGet("Field/{Id}")]
-         public Field Get(int Id)
+         [HttpGet("FieldName/{Id}")]
+         public IActionResult Get(int Id)
          {
-
-             return db.Field.SingleOrDefault(x => x.Id == Id);
+           
+            List<Field> fields = new List<Field>();
+            List<User_to_field> userFields = db.User_to_field.Where(x => x.Id_user == Id).ToList();
+            if (userFields.Count <= 0)
+                return NotFound();
+            foreach(var userFieldsd in userFields)
+            {
+                fields.Add(db.Field.FirstOrDefault(x => x.Id == userFieldsd.Id_field));
+            }
+             return Ok(fields.Select(x=>x.Name));
          }
 
         [HttpGet("getNdviMap/{Id}")]
