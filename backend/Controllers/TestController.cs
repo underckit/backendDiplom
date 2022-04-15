@@ -23,6 +23,7 @@ namespace backend.Controllers
         // GET: api/<TestController>
        
        
+         // вывод полей по айди юзера
          [HttpGet("FieldName/{Id}")]
          public IActionResult Get(int Id)
          {
@@ -38,6 +39,7 @@ namespace backend.Controllers
              return Ok(fields.Select(x=>x.Name));
          }
 
+        //вывод ndvi карты  и координат поля с датой фото
         [HttpGet("getNdviMap/{Id}")]
         public NdviToCoordinates GetMap(int Id, DateTime date)
         {
@@ -51,6 +53,8 @@ namespace backend.Controllers
             return output ;
         }
 
+
+        
 
 
 
