@@ -12,6 +12,8 @@ namespace backend.Models
         public string Name { get; set; }
         public string Coordinates { get; set; }
         public string Polycentr { get; set; }
-       
+        public bool deleted { get; set; }
+
     }
+
 }
