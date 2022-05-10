@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace backend.Models
 {
-    public class Field
+    public class field
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public string Coordinates { get; set; }
-        public string Polycentr { get; set; }
+        public int id { get; set; }
+        public string name { get; set; }
+        public string coordinates { get; set; }
+        public string polycentr { get; set; }
         public bool deleted { get; set; }
 
     }

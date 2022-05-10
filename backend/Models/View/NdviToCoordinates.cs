@@ -7,8 +7,8 @@ namespace backend.Models
 {
     public class NdviToCoordinates
     {
-        public string Coordinates { get; set; }
-        public string Ndvimap { get; set; }
-        public DateTime Date { get; set; }
+        public string coordinates { get; set; }
+        public string ndvimap { get; set; }
+        public DateTime date { get; set; }
     }
 }

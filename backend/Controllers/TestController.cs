@@ -24,19 +24,19 @@ namespace backend.Controllers
 
 
         // вывод полей по айди юзера
-        [HttpGet("FieldName/{Id}")]
+        [HttpGet("FieldNameForUser/{Id}")]
         public IActionResult Get(int Id)
         {
 
-            List<Field> fields = new List<Field>();
-            List<User_to_field> userFields = db.User_to_field.Where(x => x.Id_user == Id).ToList();
+            List<field> fields = new List<field>();
+            List<user_to_field> userFields = db.user_to_field.Where(x => x.id_user == Id).ToList();
             if (userFields.Count <= 0)
                 return NotFound();
             foreach (var userFieldsd in userFields)
             {
-                fields.Add(db.Field.FirstOrDefault(x => x.Id == userFieldsd.Id_field));
+                fields.Add(db.field.FirstOrDefault(x => x.id == userFieldsd.id_field));
             }
-            return Ok(fields.Select(x => x.Name));
+            return Ok(fields.Select(x => x.name));
         }
 
         //вывод ndvi карты  и координат поля с датой фото
@@ -44,11 +44,11 @@ namespace backend.Controllers
         public NdviToCoordinates GetMap(int Id, DateTime date)
         {
             NdviToCoordinates output = new NdviToCoordinates();
-            output.Coordinates = db.Field.SingleOrDefault(x => x.Id == Id).Coordinates;
+            output.coordinates = db.field.SingleOrDefault(x => x.id == Id).coordinates;
 
-            output.Date = db.Ndvi.SingleOrDefault(x => x.Id_field == Id && x.Date == date).Date;
+            output.date = db.ndvi.SingleOrDefault(x => x.id_field == Id && x.date == date).date;
 
-            output.Ndvimap = db.Ndvi.SingleOrDefault(x => x.Id_field == Id && x.Date == date).Ndvimap;
+            output.ndvimap = db.ndvi.SingleOrDefault(x => x.id_field == Id && x.date == date).ndvimap;
 
             return output;
         }
@@ -56,23 +56,23 @@ namespace backend.Controllers
         [HttpPost("addField")]
         public void addField ([FromBody] CreateField createField)
         {
-            db.Field.Add(createField.field);
+            db.field.Add(createField.field);
             db.SaveChanges();
 
-            var user_to_field = new User_to_field { } ;
-            user_to_field.Id_user = createField.id_user;
-            user_to_field.Id_field = createField.field.Id;
-            db.User_to_field.Add(user_to_field);
+            var user_to_field = new user_to_field { } ;
+            user_to_field.id_user = createField.id_user;
+            user_to_field.id_field = createField.field.id;
+            db.user_to_field.Add(user_to_field);
 
             db.SaveChanges();
 
         }
 
         [HttpPut("updateField/{id}")]
-        public void updateField(int id , [FromBody] Field updateField)
+        public void updateField(int id , [FromBody] field updateField)
         {
-            updateField.Id = id;
-            db.Field.Update(updateField);
+            updateField.id = id;
+            db.field.Update(updateField);
             db.SaveChanges();
         }
 
@@ -80,21 +80,21 @@ namespace backend.Controllers
         [HttpDelete("deleteField/{id}")]
         public void deleteField(int id)
         {
-            var item = db.Field.FirstOrDefault(x => x.Id == id);
+            var item = db.field.FirstOrDefault(x => x.id == id);
 
       
-            foreach (var f in db.User_to_field)
+            foreach (var f in db.user_to_field)
             {
-                if (f.Id_field == id)
+                if (f.id_field == id)
                 {
-                    db.User_to_field.Remove(f);
+                    db.user_to_field.Remove(f);
                 }
             }
 
             if (item != null)
             {
                
-                db.Field.FirstOrDefault(x => x.Id == id).deleted = true;
+                db.field.FirstOrDefault(x => x.id == id).deleted = true;
                 db.SaveChanges();
             }
 

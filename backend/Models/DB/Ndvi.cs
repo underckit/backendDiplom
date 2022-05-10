@@ -5,13 +5,13 @@ using System.Threading.Tasks;
 
 namespace backend.Models
 {
-    public class Ndvi
+    public class ndvi
     {
-        public int Id { get; set; }
-        public DateTime Date { get; set; }
-        public string Image { get; set; }
-        public string Ndvimap { get; set; }
-        public int Id_field { get; set; }
+        public int id { get; set; }
+        public DateTime date { get; set; }
+        public string image { get; set; }
+        public string ndvimap { get; set; }
+        public int id_field { get; set; }
 
 
 

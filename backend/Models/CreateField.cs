@@ -8,6 +8,6 @@ namespace backend.Models
     public class CreateField
     {
         public int id_user { get; set; }
-        public Field field { get; set; }
+        public field field { get; set; }
     }
 }

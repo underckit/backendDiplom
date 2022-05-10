@@ -11,10 +11,10 @@ namespace backend.Models
     {
 
        
-        public DbSet<User> User { get; set; }
-        public DbSet<Field> Field { get; set; }
-        public DbSet<Ndvi> Ndvi { get; set; }
-        public DbSet<User_to_field> User_to_field { get; set; }
+        public DbSet<user> user { get; set; }
+        public DbSet<field> field { get; set; }
+        public DbSet<ndvi> ndvi { get; set; }
+        public DbSet<user_to_field> user_to_field { get; set; }
 
 
         public ApplicationContext(DbContextOptions<ApplicationContext> options)

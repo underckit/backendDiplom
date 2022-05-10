@@ -5,12 +5,12 @@ using System.Threading.Tasks;
 
 namespace backend.Models
 {
-    public class User_to_field
+    public class user_to_field
     {
         public int id { get; set; }
 
-        public int Id_user { get; set; }
-        public int Id_field { get; set; }
+        public int id_user { get; set; }
+        public int id_field { get; set; }
 
     }
 }
