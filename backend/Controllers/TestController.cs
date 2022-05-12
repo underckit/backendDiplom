@@ -29,14 +29,19 @@ namespace backend.Controllers
         {
 
             List<field> fields = new List<field>();
+            // берутся поля связанные с пользователем из таблицы many to many
             List<user_to_field> userFields = db.user_to_field.Where(x => x.id_user == Id).ToList();
             if (userFields.Count <= 0)
                 return NotFound();
+            // добавлеине полей в список  по сверяя по айди 
             foreach (var userFieldsd in userFields)
             {
                 fields.Add(db.field.FirstOrDefault(x => x.id == userFieldsd.id_field));
+
             }
-            return Ok(fields.Select(x => x.name));
+            //return Ok(fields.Select(x => x.name));
+            return Ok(fields.Select(x => new {name = x.name, id = x.id }));
+
         }
 
         //вывод ndvi карты  и координат поля с датой фото
