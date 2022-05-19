@@ -40,6 +40,7 @@ namespace backend.Controllers
 
             }
             //return Ok(fields.Select(x => x.name));
+            
             return Ok(fields.Select(x => new {name = x.name, id = x.id }));
 
         }
@@ -61,14 +62,13 @@ namespace backend.Controllers
         [HttpPost("addField")]
         public void addField ([FromBody] CreateField createField)
         {
+            //добавляем поле в бд
             db.field.Add(createField.field);
-            db.SaveChanges();
-
             var user_to_field = new user_to_field { } ;
+            //связываем юзера и пользователя
             user_to_field.id_user = createField.id_user;
             user_to_field.id_field = createField.field.id;
             db.user_to_field.Add(user_to_field);
-
             db.SaveChanges();
 
         }
