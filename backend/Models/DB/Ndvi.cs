@@ -8,7 +8,8 @@ namespace backend.Models
     public class ndvi
     {
         public int id { get; set; }
-        public DateTime date { get; set; }
+        public DateTime date1 { get; set; }
+        public DateTime date2 { get; set; }
         public string image { get; set; }
         public string ndvimap { get; set; }
         public int id_field { get; set; }

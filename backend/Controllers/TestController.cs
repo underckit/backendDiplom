@@ -41,20 +41,20 @@ namespace backend.Controllers
             }
             //return Ok(fields.Select(x => x.name));
             
-            return Ok(fields.Select(x => new {name = x.name, id = x.id }));
+            return Ok(fields.Select(x => new {name = x.name, id = x.id , coordinates= x.coordinates}));
 
         }
 
         //вывод ndvi карты  и координат поля с датой фото
         [HttpGet("getNdviMap/{Id}")]
-        public NdviToCoordinates GetMap(int Id, DateTime date)
+        public NdviToCoordinates GetMap(int Id, DateTime date1, DateTime date2)
         {
             NdviToCoordinates output = new NdviToCoordinates();
             output.coordinates = db.field.SingleOrDefault(x => x.id == Id).coordinates;
 
-            output.date = db.ndvi.SingleOrDefault(x => x.id_field == Id && x.date == date).date;
-
-            output.ndvimap = db.ndvi.SingleOrDefault(x => x.id_field == Id && x.date == date).ndvimap;
+            output.date1 = db.ndvi.SingleOrDefault(x => x.id_field == Id && x.date1 == date1).date1;
+            output.date2 = db.ndvi.SingleOrDefault(x => x.id_field == Id && x.date2 == date2).date2;
+            output.ndvimap = db.ndvi.SingleOrDefault(x => x.id_field == Id && x.date1 == date1 && x.date2 == date2).ndvimap;
 
             return output;
         }
@@ -65,6 +65,7 @@ namespace backend.Controllers
             //добавляем поле в бд
             db.field.Add(createField.field);
             var user_to_field = new user_to_field { } ;
+            db.SaveChanges();
             //связываем юзера и пользователя
             user_to_field.id_user = createField.id_user;
             user_to_field.id_field = createField.field.id;
@@ -95,6 +96,8 @@ namespace backend.Controllers
                     db.user_to_field.Remove(f);
                 }
             }
+
+           
 
             if (item != null)
             {

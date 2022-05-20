@@ -9,6 +9,7 @@ namespace backend.Models
     {
         public string coordinates { get; set; }
         public string ndvimap { get; set; }
-        public DateTime date { get; set; }
+        public DateTime date1 { get; set; }
+        public DateTime date2 { get; set; }
     }
 }
