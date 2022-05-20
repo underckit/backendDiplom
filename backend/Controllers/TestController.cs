@@ -89,14 +89,15 @@ namespace backend.Controllers
                 {
                     Ndvi.id_field = id_field;
                     db.ndvi.Add(Ndvi);
-                    db.SaveChanges();
+                    
+                    
                 }
 
                
             }
 
-          
-            
+
+            db.SaveChanges();
 
 
 
