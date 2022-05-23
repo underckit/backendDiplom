@@ -20,8 +20,6 @@ namespace backend.Controllers
         {
             db = context;
         }
-        // GET: api/<TestController>
-
 
         // вывод полей по айди юзера
         [HttpGet("FieldNameForUser/{Id}")]
@@ -76,7 +74,7 @@ namespace backend.Controllers
         [HttpPost("addDateNDVI")]
         public void addDate(int id_field, DateTime startdate, DateTime enddate)
         {
-            //добавляем поле в бд
+            
             ndvi Ndvi = new ndvi();
             
             Ndvi.startdate = startdate;
