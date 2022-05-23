@@ -13,9 +13,5 @@ namespace backend.Models
         public string ndvimap { get; set; }
         public int id_field { get; set; }
 
-
-
-
-
     }
 }
