@@ -27,6 +27,7 @@ namespace backend
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            // добавляем контекст ApplicationContext в качестве сервиса в приложение
             string connection = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<ApplicationContext>(options =>
             options.UseNpgsql(connection));

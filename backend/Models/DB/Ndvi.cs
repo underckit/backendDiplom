@@ -10,7 +10,6 @@ namespace backend.Models
         public int id { get; set; }
         public DateTime startdate { get; set; }
         public DateTime enddate { get; set; }
-        public string image { get; set; }
         public string ndvimap { get; set; }
         public int id_field { get; set; }
 
