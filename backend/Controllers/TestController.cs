@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using backend.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Scripting.Hosting;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -34,7 +35,7 @@ namespace backend.Controllers
             // добавлеине полей в список  по сверяя по айди 
             foreach (var userFieldsd in userFields)
             {
-                fields.Add(db.field.FirstOrDefault(x => x.id == userFieldsd.id_field));
+                fields.Add(db.field.FirstOrDefault(x => x.id == userFieldsd.id_field ));
 
             }
             
@@ -86,19 +87,10 @@ namespace backend.Controllers
                 if (f.id == id_field)
                 {
                     Ndvi.id_field = id_field;
-                    db.ndvi.Add(Ndvi);
-                    
-                    
+                    db.ndvi.Add(Ndvi);    
                 }
-
-               
             }
-
-
             db.SaveChanges();
-
-
-
         }
 
         [HttpPut("updateField/{id}")]
