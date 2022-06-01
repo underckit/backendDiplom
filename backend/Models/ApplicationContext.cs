@@ -9,8 +9,6 @@ namespace backend.Models
 {
     public class ApplicationContext: DbContext
     {
-
-       
         public DbSet<user> user { get; set; }
         public DbSet<field> field { get; set; }
         public DbSet<ndvi> ndvi { get; set; }
