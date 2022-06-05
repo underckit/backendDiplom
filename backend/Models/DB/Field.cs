@@ -11,7 +11,6 @@ namespace backend.Models
         public int id { get; set; }
         public string name { get; set; }
         public string coordinates { get; set; }
-        public string polycentr { get; set; }
         public bool deleted { get; set; }
 
     }
