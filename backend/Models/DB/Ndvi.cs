@@ -11,6 +11,7 @@ namespace backend.Models
         public DateTime startdate { get; set; }
         public DateTime enddate { get; set; }
         public string ndvimap { get; set; }
+        public string type { get; set; }
         public int id_field { get; set; }
 
 

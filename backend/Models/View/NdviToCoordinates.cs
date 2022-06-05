@@ -11,5 +11,6 @@ namespace backend.Models
         public string ndvimap { get; set; }
         public DateTime startdate { get; set; }
         public DateTime enddate{ get; set; }
+        public string type { get; set; }
     }
 }
