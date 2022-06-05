@@ -74,30 +74,8 @@ namespace backend.Controllers
 
         }
 
-        /*[HttpPost("addDateNDVI")]
-        public void addDate(int id_field, DateTime startdate, DateTime enddate)
-        {
-            //добавляем поле в бд
-            ndvi Ndvi = new ndvi();
-            
-            Ndvi.startdate = startdate;
-            Ndvi.enddate = enddate;
 
-            var item = db.field.FirstOrDefault(x => x.id == id_field);
-            foreach (var f in db.field)
-            {
-                if (f.id == id_field)
-                {
-                    Ndvi.id_field = id_field;
-                    db.ndvi.Add(Ndvi);
-                     
-                }
-            }
-
-            db.SaveChanges();
-        }*/
-
-        [HttpPut("updateField/{id}")] 
+        [HttpPut("updateField/{id}")]  
         public void updateField(int id , [FromBody] field updateField)
         {
             updateField.id = id;

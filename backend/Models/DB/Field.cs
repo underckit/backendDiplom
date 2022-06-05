@@ -8,7 +8,7 @@ namespace backend.Models
 {
     public class field
     {
-        public int id { get; set; }
+        public int id { get; set; } 
         public string name { get; set; }
         public string coordinates { get; set; }
         public bool deleted { get; set; }
