@@ -97,7 +97,7 @@ namespace backend.Controllers
             db.SaveChanges();
         }*/
 
-        [HttpPut("updateField/{id}")]
+        [HttpPut("updateField/{id}")] 
         public void updateField(int id , [FromBody] field updateField)
         {
             updateField.id = id;
