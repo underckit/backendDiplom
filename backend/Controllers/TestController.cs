@@ -44,21 +44,31 @@ namespace backend.Controllers
 
         //вывод ndvi карты  и координат поля с датой фото
         [HttpGet("getNdviMap/{Id}")]
-        public NdviToCoordinates GetMap(int Id, DateTime startdate, DateTime enddate)
+        public IActionResult GetMap(int Id, DateTime startdate, DateTime enddate, string type)
         {
             NdviToCoordinates output = new NdviToCoordinates();
-            
-            output.coordinates = db.field.SingleOrDefault(x => x.id == Id).coordinates;
-            output.startdate = db.ndvi.SingleOrDefault(x => x.id_field == Id && x.startdate == startdate 
-            && x.enddate == enddate).startdate;
-            output.enddate = db.ndvi.SingleOrDefault(x => x.id_field == Id && x.startdate == startdate 
-            && x.enddate == enddate).enddate;
-            output.ndvimap = db.ndvi.SingleOrDefault(x => x.id_field == Id && x.startdate == startdate 
-            && x.enddate == enddate).ndvimap;
-            output.type = db.ndvi.SingleOrDefault(x => x.id_field == Id && x.startdate == startdate 
-            && x.enddate == enddate).type;
+            try
+            {
+                output.coordinates = db.field.SingleOrDefault(x => x.id == Id).coordinates;
+                output.startdate = db.ndvi.SingleOrDefault(x => x.id_field == Id && x.startdate == startdate
+                && x.enddate == enddate && x.type == type).startdate;
+                output.enddate = db.ndvi.SingleOrDefault(x => x.id_field == Id && x.startdate == startdate
+                && x.enddate == enddate && x.type == type).enddate;
+                output.ndvimap = db.ndvi.SingleOrDefault(x => x.id_field == Id && x.startdate == startdate
+                && x.enddate == enddate && x.type == type).ndvimap;
+                output.type = db.ndvi.SingleOrDefault(x => x.id_field == Id && x.startdate == startdate
+                && x.enddate == enddate && x.type == type).type;
 
-            return output;
+            }
+
+            catch(Exception)
+            {
+                return NotFound();
+
+            }
+
+            return Ok(output);
+
         }
 
         //вывод всех contrast ndvi юзера
@@ -67,9 +77,16 @@ namespace backend.Controllers
         {
             List<ndvi> ndvis = db.ndvi.Where(x => x.id_field == Id && x.type == "contrast").ToList(); ;
 
-            return Ok(ndvis.Select(x => new { ndvimap = x.ndvimap, 
-                startdate = x.startdate,
-                enddate = x.enddate}));           
+            if (ndvis.Count <= 0)
+                return NotFound();
+            else
+            {
+                return Ok(ndvis.Select(x => new {
+                    ndvimap = x.ndvimap,
+                    startdate = x.startdate,
+                    enddate = x.enddate
+                }));
+            }
         }
 
         //вывод всех contrast ndvi юзера
@@ -78,11 +95,19 @@ namespace backend.Controllers
         {
             List<ndvi> ndvis = db.ndvi.Where(x => x.id_field == Id && x.type == "color").ToList(); ;
 
-            return Ok(ndvis.Select(x => new {
-                ndvimap = x.ndvimap,
-                startdate = x.startdate,
-                enddate = x.enddate
-            }));
+            if (ndvis.Count <= 0)
+                return NotFound();
+            else 
+            { 
+                return Ok(ndvis.Select(x => new {
+                    ndvimap = x.ndvimap,
+                    startdate = x.startdate,
+                    enddate = x.enddate
+                }));
+            }
+
+
+
         }
 
         [HttpPost("addField")]
