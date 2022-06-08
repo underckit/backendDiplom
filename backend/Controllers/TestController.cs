@@ -110,6 +110,42 @@ namespace backend.Controllers
 
         }
 
+        //вывод всех contrast ndvi юзера с апсемплингом
+        [HttpGet("getAllContrastUpNdviMaps")]
+        public IActionResult GetContrastUpNdvi(int Id)
+        {
+            List<ndvi> ndvis = db.ndvi.Where(x => x.id_field == Id && x.type == "contrastUpsampling").ToList(); ;
+
+            if (ndvis.Count <= 0)
+                return NotFound();
+            else
+            {
+                return Ok(ndvis.Select(x => new {
+                    ndvimap = x.ndvimap,
+                    startdate = x.startdate,
+                    enddate = x.enddate
+                }));
+            }
+        }
+
+        //вывод всех color ndvi юзера с апсемплингом
+        [HttpGet("getAllColorUpNdviMaps")]
+        public IActionResult GetColorUpNdvi(int Id)
+        {
+            List<ndvi> ndvis = db.ndvi.Where(x => x.id_field == Id && x.type == "colorUpsampling").ToList(); ;
+
+            if (ndvis.Count <= 0)
+                return NotFound();
+            else
+            {
+                return Ok(ndvis.Select(x => new {
+                    ndvimap = x.ndvimap,
+                    startdate = x.startdate,
+                    enddate = x.enddate
+                }));
+            }
+        }
+
         [HttpPost("addField")]
         public void addField ([FromBody] CreateField createField)
         {
