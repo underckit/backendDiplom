@@ -106,8 +106,6 @@ namespace backend.Controllers
                 }));
             }
 
-
-
         }
 
         //вывод всех contrast ndvi юзера с апсемплингом
