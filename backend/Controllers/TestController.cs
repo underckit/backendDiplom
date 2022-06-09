@@ -171,7 +171,7 @@ namespace backend.Controllers
 
             db.field.Update(db.field.SingleOrDefault(x => x.id == id));
             db.SaveChanges();
-        }
+        } 
 
 
         [HttpDelete("deleteField/{id}")]
