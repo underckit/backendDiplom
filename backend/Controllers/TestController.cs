@@ -163,12 +163,13 @@ namespace backend.Controllers
         [HttpPut("updateField/{id}")]  
         public void updateField(int id , [FromBody] field updateField)
         {
-            updateField.id = id;
-            if (updateField.coordinates == null)
-                updateField.coordinates = db.field.SingleOrDefault(x => x.id == id).coordinates;
-            if (updateField.name == null)
-                updateField.name = db.field.SingleOrDefault(x => x.id == id).name;
-            db.field.Update(updateField);
+            
+            if (updateField.coordinates != null)
+                db.field.SingleOrDefault(x => x.id == id).coordinates = updateField.coordinates;
+            if (updateField.name != null)
+                db.field.SingleOrDefault(x => x.id == id).name = updateField.name;
+
+            db.field.Update(db.field.SingleOrDefault(x => x.id == id));
             db.SaveChanges();
         }
 
