@@ -164,6 +164,10 @@ namespace backend.Controllers
         public void updateField(int id , [FromBody] field updateField)
         {
             updateField.id = id;
+            if (updateField.coordinates == null)
+                updateField.coordinates = db.field.SingleOrDefault(x => x.id == id).coordinates;
+            if (updateField.name == null)
+                updateField.name = db.field.SingleOrDefault(x => x.id == id).name;
             db.field.Update(updateField);
             db.SaveChanges();
         }
